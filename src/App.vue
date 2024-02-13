@@ -1,5 +1,5 @@
 <script>
-import ExampleName from "./components/ExampleName.vue";
+import ExampleName from "./components/header/ExampleName.vue";
 import { store } from "./store";
 import axios from "axios";
 
@@ -8,42 +8,14 @@ export default {
     ExampleName,
   },
   data() {
-    return {
-      store,
-    };
+    return {};
   },
-  created() {
-    this.requestRandomMail();
-  },
-  methods: {
-    requestRandomMail() {
-      axios
-        .get("https://flynn.boolean.careers/exercises/api/random/mail")
-        .then((result) => {
-          store.randomMail = result.data.response;
-        });
-    },
-  },
+  methods: {},
 };
 </script>
 
-<template>
-  <h1>Hello World</h1>
-  <h2>{{ store.helloValue }}</h2>
-  <h3>axios request: {{ store.randomMail }}</h3>
-  <ExampleName />
-</template>
+<template></template>
 
 <style lang="scss">
 @use "./styles/general.scss";
-
-h2 {
-  font-size: 120px;
-  color: aquamarine;
-}
-
-h3 {
-  font-size: 80px;
-  color: blueviolet;
-}
 </style>

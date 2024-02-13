@@ -1,7 +1,23 @@
 @use "./partials/variables" as *;
 @use "./partials/mixins" as *;
 
-h1 {
-    color: $font-color;
-    @include main-font-center;
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: "PT Sans Narrow", sans-serif;
+}
+
+body {
+  background-color: $bg-body-color;
+}
+
+img {
+  width: 100%;
+  display: block;
 }
