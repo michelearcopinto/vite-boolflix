@@ -8,6 +8,11 @@ export default {
       store,
     };
   },
+  methods: {
+    remainingStars(vote) {
+      return 5 - vote;
+    },
+  },
 };
 </script>
 
@@ -42,7 +47,11 @@ export default {
               </li>
               <li>
                 <strong>Voto: </strong>
-                <i v-for="star in element.vote" class="fas fa-star"></i>
+                <i v-for="star in element.vote" class="fa-solid fa-star"></i>
+                <i
+                  v-for="darkStar in remainingStars(element.vote)"
+                  class="fa-regular fa-star"
+                ></i>
               </li>
               <li><strong>Overview:</strong> {{ element.overview }}</li>
             </ul>
@@ -80,7 +89,11 @@ export default {
               </li>
               <li>
                 <strong>Voto: </strong>
-                <i v-for="star in element.vote" class="fas fa-star"></i>
+                <i v-for="star in element.vote" class="fa-solid fa-star"></i>
+                <i
+                  v-for="darkStar in remainingStars(element.vote)"
+                  class="fa-regular fa-star"
+                ></i>
               </li>
               <li><strong>Overview:</strong> {{ element.overview }}</li>
             </ul>
