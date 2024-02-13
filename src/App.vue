@@ -1,20 +1,30 @@
 <script>
-import ExampleName from "./components/header/ExampleName.vue";
+import AppHeader from "./components/header/AppHeader.vue";
+import AppGrid from "./components/main/AppGrid.vue";
 import { store } from "./store";
-import axios from "axios";
 
 export default {
   components: {
-    ExampleName,
+    AppHeader,
+    AppGrid,
   },
   data() {
-    return {};
+    return {
+      store,
+    };
   },
-  methods: {},
 };
 </script>
 
-<template></template>
+<template>
+  <header>
+    <AppHeader />
+  </header>
+
+  <main>
+    <AppGrid />
+  </main>
+</template>
 
 <style lang="scss">
 @use "./styles/general.scss";

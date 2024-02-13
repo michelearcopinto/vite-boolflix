@@ -21,3 +21,47 @@ img {
   width: 100%;
   display: block;
 }
+
+li {
+  list-style: none;
+}
+
+header {
+  background-color: black;
+  color: $header-font-color;
+  padding: 30px 25px 15px;
+  display: flex;
+  justify-content: space-between;
+
+  h1 {
+    text-transform: uppercase;
+  }
+
+  div {
+    display: flex;
+    gap: 5px;
+    padding: 5px;
+
+    button,
+    input {
+      padding-inline: 8px;
+    }
+
+    button:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+main {
+  height: calc(100vh - 87px);
+  width: 90%;
+  margin-top: 50px;
+  margin-inline: auto;
+}
+
+.disabled {
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.5;
+}
