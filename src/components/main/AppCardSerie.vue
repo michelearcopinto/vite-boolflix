@@ -1,14 +1,40 @@
 <script>
 import { store } from "../../store";
+import axios from "axios";
 
 export default {
   name: "AppCardSerie",
   data() {
     return {
       store,
+      castSerieArray: [],
     };
   },
   props: ["propSerieElement"],
+  async mounted() {
+    await this.requestSerieActors(this.propSerieElement.id);
+  },
+  methods: {
+    async requestSerieActors(id) {
+      this.castSeriesArray = [];
+
+      await axios
+        .get(
+          `https://api.themoviedb.org/3/tv/${id}/credits?api_key=0df5a2eb5ea675b674ccceded6427c04`
+        )
+        .then((result) => {
+          let slicedArray = result.data.cast.slice(0, 5);
+          slicedArray.forEach((serie) => {
+            this.castSerieArray.push({
+              name: serie.name,
+            });
+          });
+
+          console.log(this.castSerieArray);
+          return this.castSerieArray;
+        });
+    },
+  },
 };
 </script>
 
@@ -51,6 +77,20 @@ export default {
           ></i>
         </li>
         <li><strong>Overview:</strong> {{ propSerieElement.overview }}</li>
+        <li>
+          <strong>Attori:</strong>
+          <span
+            v-if="castSerieArray.length !== 0"
+            v-for="(actor, index) in castSerieArray"
+            :key="index"
+            >{{
+              index === castSerieArray.length - 1
+                ? ` ${actor.name}`
+                : ` ${actor.name},`
+            }}
+          </span>
+          <span v-else> Database vuoto</span>
+        </li>
       </ul>
     </div>
   </div>

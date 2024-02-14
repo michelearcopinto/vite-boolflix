@@ -26,6 +26,7 @@ export default {
         .then((result) => {
           result.data.results.forEach((movie) => {
             store.moviesArray.push({
+              id: movie.id,
               title: movie.title,
               original_title: movie.original_title,
               language: movie.original_language,
@@ -46,6 +47,7 @@ export default {
         .then((result) => {
           result.data.results.forEach((serie) => {
             store.seriesArray.push({
+              id: serie.id,
               title: serie.name,
               original_title: serie.original_name,
               language: serie.original_language,

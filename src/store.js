@@ -13,14 +13,9 @@ export const store = reactive({
   remainingStars(vote) {
     return 5 - vote;
   },
-  getFiveResults(array) {
-    return array.slice(0, 5);
-  },
   checkTitle(element) {
-    let splittedTitleWords = element.split(" ");
-    let joinedTitle = splittedTitleWords.join("");
-    let lowerCaseTitle = joinedTitle.toLowerCase();
+    let modifiedTitle = element.split(" ").join("").toLowerCase();
 
-    return lowerCaseTitle;
+    return modifiedTitle;
   },
 });
