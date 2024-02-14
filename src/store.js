@@ -10,4 +10,7 @@ export const store = reactive({
   seriesArray: [],
   moviesContainerOpened: false,
   seriesContainerOpened: false,
+  remainingStars(vote) {
+    return 5 - vote;
+  },
 });

@@ -1,23 +1,27 @@
 <script>
 import { store } from "../../store";
+import AppCardMovie from "./AppCardMovie.vue";
+import AppCardSerie from "./AppCardSerie.vue";
 
 export default {
   name: "AppGrid",
+  components: {
+    AppCardMovie,
+    AppCardSerie,
+  },
   data() {
     return {
       store,
     };
   },
-  methods: {
-    remainingStars(vote) {
-      return 5 - vote;
-    },
-  },
 };
 </script>
 
 <template>
-  <div :class="store.seriesArray.length === 0 ? 'd-none' : ''">
+  <div
+    class="grid-container"
+    :class="store.seriesArray.length === 0 ? 'd-none' : ''"
+  >
     <div
       class="movies-header"
       @click="store.moviesContainerOpened = !store.moviesContainerOpened"
@@ -32,31 +36,10 @@ export default {
       :class="store.moviesContainerOpened ? 'd-none' : ''"
     >
       <div class="grid">
-        <div class="card" v-for="element in store.moviesArray">
-          <figure>
-            <img
-              :src="`https://image.tmdb.org/t/p/w342${element.poster}`"
-              :alt="`poster: ${element.title}`"
-            />
-          </figure>
-          <div class="card-info">
-            <ul>
-              <li><strong>Titolo:</strong> {{ element.title }}</li>
-              <li>
-                <strong>Titolo originale:</strong> {{ element.original_title }}
-              </li>
-              <li>
-                <strong>Voto: </strong>
-                <i v-for="star in element.vote" class="fa-solid fa-star"></i>
-                <i
-                  v-for="darkStar in remainingStars(element.vote)"
-                  class="fa-regular fa-star"
-                ></i>
-              </li>
-              <li><strong>Overview:</strong> {{ element.overview }}</li>
-            </ul>
-          </div>
-        </div>
+        <AppCardMovie
+          v-for="element in store.moviesArray"
+          :propMovieElement="element"
+        />
       </div>
     </div>
 
@@ -74,30 +57,11 @@ export default {
       :class="store.seriesContainerOpened ? 'd-none' : ''"
     >
       <div class="grid">
-        <div class="card" v-for="element in store.seriesArray">
-          <figure>
-            <img
-              :src="`https://image.tmdb.org/t/p/w342${element.poster}`"
-              :alt="`poster: ${element.title}`"
-            />
-          </figure>
-          <div class="card-info">
-            <ul>
-              <li><strong>Titolo:</strong> {{ element.title }}</li>
-              <li>
-                <strong>Titolo originale:</strong> {{ element.original_title }}
-              </li>
-              <li>
-                <strong>Voto: </strong>
-                <i v-for="star in element.vote" class="fa-solid fa-star"></i>
-                <i
-                  v-for="darkStar in remainingStars(element.vote)"
-                  class="fa-regular fa-star"
-                ></i>
-              </li>
-              <li><strong>Overview:</strong> {{ element.overview }}</li>
-            </ul>
-          </div>
+        <div class="grid">
+          <AppCardSerie
+            v-for="element in store.seriesArray"
+            :propSerieElement="element"
+          />
         </div>
       </div>
     </div>
@@ -112,42 +76,6 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-
-  .card {
-    width: calc((100% - 20px * 2) / 3);
-    position: relative;
-
-    figure {
-      height: 100%;
-
-      img {
-        height: 100%;
-      }
-    }
-
-    &:hover .card-info {
-      display: block;
-    }
-
-    .card-info {
-      background-color: rgba($color: #000000, $alpha: 0.8);
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      font-size: 25px;
-      color: white;
-      padding: 50px 20px 0px;
-      overflow: auto;
-      display: none;
-
-      i {
-        color: yellow;
-        font-size: 20px;
-      }
-    }
-  }
 }
 
 .series-header,
@@ -176,11 +104,18 @@ export default {
 .series-container {
   background-color: $bg-container-color;
   padding: 20px;
-  margin-bottom: 30px;
   border-radius: 10px;
+}
+
+.movies-container {
+  margin-bottom: 30px;
 }
 
 .d-none {
   display: none;
+}
+
+.grid-container {
+  padding-bottom: 50px;
 }
 </style>
