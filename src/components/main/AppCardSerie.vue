@@ -16,16 +16,26 @@ export default {
   <div class="card">
     <figure>
       <img
-        :src="`https://image.tmdb.org/t/p/w342${propSerieElement.poster}`"
+        :src="
+          propSerieElement.poster
+            ? `https://image.tmdb.org/t/p/w342${propSerieElement.poster}`
+            : './src/assets/img/image-alt.webp'
+        "
         :alt="`poster: ${propSerieElement.title}`"
       />
     </figure>
     <div class="card-info">
       <ul>
         <li><strong>Titolo:</strong> {{ propSerieElement.title }}</li>
-        <li>
+        <li v-show="propSerieElement.original_title !== propSerieElement.title">
           <strong>Titolo originale:</strong>
           {{ propSerieElement.original_title }}
+        </li>
+        <li>
+          <strong>Lingua: </strong>
+          <span :class="`lang-icon lang-icon-${propSerieElement.language}`">
+          </span>
+          <span class="language-code">- {{ propSerieElement.language }}</span>
         </li>
         <li>
           <strong>Voto: </strong>
