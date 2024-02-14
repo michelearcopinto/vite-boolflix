@@ -27,7 +27,12 @@ export default {
     <div class="card-info">
       <ul>
         <li><strong>Titolo:</strong> {{ propSerieElement.title }}</li>
-        <li v-show="propSerieElement.original_title !== propSerieElement.title">
+        <li
+          v-show="
+            store.checkTitle(propSerieElement.title) !==
+            store.checkTitle(propSerieElement.original_title)
+          "
+        >
           <strong>Titolo originale:</strong>
           {{ propSerieElement.original_title }}
         </li>
